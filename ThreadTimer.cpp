@@ -161,7 +161,7 @@ uint64_t ThreadTimer::AddExpiresFromNow(
 uint64_t ThreadTimer::AddExpiresFromAt(const std::string &fmtDateTime,
     std::size_t ms, std::function<void(uint64_t)> cb)
 {
-    // 斩仓超时时刻
+    // 超时时刻
     boost::posix_time::ptime tm(
         boost::posix_time::time_from_string(fmtDateTime));
         
@@ -231,8 +231,26 @@ std::size_t ThreadTimer::DynamicTimerSize()
 }
 
 
+// ############################### 使用示例 ###############################
 
+void cbFunc(uint64_t nTimerID)
+{
+    std::cout << "timer: " << nTimerID << ", elapse 1 second." << std::endl;
+}
 
+int main()
+{
+    ThreadTimer tt;
+    tt.Start();
+    
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    tt.AddExpiresFromNow(1000, cbFunc);
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    // EXPECT_EQ(0, tt.DynamicTimerSize());
+    tt.Stop();
+    
+    return 0;
+}
 
 
 
