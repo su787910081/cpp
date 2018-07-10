@@ -68,6 +68,18 @@ extern char* cur_time_03(char strDateTime[32])
     return strDatetime;
 }
 
+extern char* cur_time_04(char strDateTime[64])
+{
+    boost::posix_time::ptime tm_msloc = boost::posix_time::microsec_clock::local_time();
+    boost::posix_time::time_duration td_msloc = tm_msloc.time_of_day(); // 获取时间部分
+    
+    sprintf(strDateTime, "%02d:%02d:%02d.%03d",
+            td_msloc.hours(), td_msloc.minutes(), td_msloc.seconds(), 
+            td_msloc.fractional_seconds / 1000);
+    
+    return strDateTime;
+}
+
 
 
 
