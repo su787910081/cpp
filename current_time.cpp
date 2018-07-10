@@ -71,9 +71,12 @@ extern char* cur_time_03(char strDateTime[32])
 extern char* cur_time_04(char strDateTime[64])
 {
     boost::posix_time::ptime tm_msloc = boost::posix_time::microsec_clock::local_time();
+    
+    auto&& d_msloc = tm_msloc.date();    // 日期部分
     boost::posix_time::time_duration td_msloc = tm_msloc.time_of_day(); // 获取时间部分
     
-    sprintf(strDateTime, "%02d:%02d:%02d.%03d",
+    sprintf(strDateTime, "%4d-%02d-%02d %02d:%02d:%02d.%03d",
+            d_msloc.year(), d_msloc.month().as_number(), d_msloc.day(),     // 这里的月份不用额外 +1 
             td_msloc.hours(), td_msloc.minutes(), td_msloc.seconds(), 
             td_msloc.fractional_seconds / 1000);
     
