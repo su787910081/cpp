@@ -17,8 +17,14 @@ boost::posix_time::ptime local_to_utc(const boost::posix_time::ptime & local_tm)
 // ptime 结构
 void ptime_code()
 {
-    boost::posix_time::ptime tm_local = boost::posix_time::second_clock::local_time();            // 本地时间
-    boost::posix_time::ptime tm_utc   = boost::posix_time::second_clock::universal_time();        // UTC 时间
+    boost::posix_time::ptime tm_sloc = boost::posix_time::second_clock::local_time();            // 本地时间
+    boost::posix_time::ptime tm_sutc = boost::posix_time::second_clock::universal_time();        // UTC 时间
+    boost::posix_time::ptime tm_msloc = boost::posix_time::microsec_clock::local_time();
+	boost::posix_time::ptime tm_msutc = boost::posix_time::microsec_clock::universal_time();
+    
+    auto&& d_msloc = tm_msloc.date();    // 日期部分
+    boost::posix_time::time_duration td_msloc = tm_msloc.time_of_day(); // 获取时间部分
+    uint64_t l = td_msloc.fractional_seconds();   // 获取秒的小数部分
 }
 
 
