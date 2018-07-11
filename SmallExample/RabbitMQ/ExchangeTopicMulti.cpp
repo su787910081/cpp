@@ -2,6 +2,8 @@
 #include<SimpleAmqpClient/BasicMessage.h>
 
 // 消息发送
+// strUri = "amqp://guest:guest@192.168.30.11:8820/test"
+// strUri = "amqp://[帐户名]:[密码]@[服务主机以及端口]/[虚拟机目录]
 bool PublishExchangeTopicMulti(const std::string &strUri)
 {
     AmqpClient::Channel::ptr_t channel = 
