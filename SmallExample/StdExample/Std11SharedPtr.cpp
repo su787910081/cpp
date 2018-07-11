@@ -44,3 +44,11 @@ void funcUsage()
         std::allocate_shared<ClassNameXXX>(m_alloc, xxx, xxx);
 }
 
+
+// ######################################### shared_ptr 向下类型转换 #########################################
+class Invester : public Account;
+std::shared_ptr<Account> spAccount;
+std::shared_ptr<Invester> spInvester = 
+    std::dynamic_pointer_cast<Invester>(spAccount);
+
+
