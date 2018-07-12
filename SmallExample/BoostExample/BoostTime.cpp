@@ -18,7 +18,7 @@ extern char* cur_time_04(char strDateTime[64])
 
 
 // 字符串转换为北京时间
-boost::posix_time::ptime local_to_utc(const boost::posix_time::ptime & local_tm)
+boost::posix_time::ptime local_to_utc()
 {
     // 字符串转换成ptime 时，需要考虑时区问题。这里的字符 串时间，boost 内部按第0 时区处理的。
     // 所以需要转换成北京在这个时间的UTC 时刻值(ptime 结构)。
@@ -27,7 +27,7 @@ boost::posix_time::ptime local_to_utc(const boost::posix_time::ptime & local_tm)
     using CH_ZONE = boost::date_time::local_adjustor<
         boost::posix_time::ptime, +8, boost::posix_time::no_dst>;
     
-    return CH_ZONE::local_to_utc(local_tm);
+    return CH_ZONE::local_to_utc(tm);
 }
 
 
