@@ -7,14 +7,12 @@ int main()
     boost::shared_ptr<asio_server>  sp_serv
         = boost::make_shared<asio_server>(io_svc, "", 20017);   // "" 空字符串表示监听本机所有IP
     sp_serv->listen(1);
-    
-    std::thread thdTestProto(TestProto);
-    
+        
     // 捕获信号
     boost::asio::signal_set signals_(io_svc);
     signals_.add(SIGINT);
     signals_.add(SIGTERM);
-    signals_.async_wait([&io_svc, &thdTestProto](const boost::system::error_code ec, int sig)
+    signals_.async_wait([&io_svc](const boost::system::error_code ec, int sig)
     {
         LOG4CPLUS_INFO_FMT(gLog, "signal: %d, message: %s", sig, ec.message().c_str());
         io_svc.stop();
