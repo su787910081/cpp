@@ -26,6 +26,8 @@ namespace fusion = boost::fusion;
 namespace ft     = boost::function_types;
 namespace mpl    = boost::mpl
 
+// 测试类的解释器，可以将要测试的函数与对应的字符串进行绑定，然后注册到该类中。
+// 通过标准输入该字符串以及参数，可以对该函数进行测试。
 class interpreter
 {
     class token_parser
