@@ -29,8 +29,6 @@ public:
     // 正常应该比线程个数少。
     bool listen(int accept_num = 1);
     
-    void sendTransfer(const char* topic, const std::string &bytesMsg);
-    
 private:
     void async_accept();
     void handle_accept(boost::shared_ptr<boost::asio::ip::tcp::socket> new_sock, 
