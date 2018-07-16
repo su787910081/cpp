@@ -1,0 +1,10 @@
+
+
+// 消息协议头
+message MsgHeader
+{
+    optional string topic        = 1;   // 目标主题
+    optional int32  funcid       = 2;   // 功能码
+    optional int32  sessid       = 3;   
+    optional int32  subProtoSize = 4;   // 转换消息协议字节数
+}
