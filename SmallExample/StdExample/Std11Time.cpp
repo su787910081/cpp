@@ -65,3 +65,31 @@ extern char* cur_time_03(char strDateTime[32])
     
     return strDatetime;
 }
+
+void demo()
+{
+    using HIGH_CLOCK = std::chrono::higi_resolution_clock;
+    
+    // 当前时刻
+    HIGH_CLOCK::time_point tpFirst = HIGH_CLOCK::now();
+    // 通过一个时刻得到计时时间段
+    HIGH_CLOCK::duration durFirst = tpFirst.time_since_epoch();
+    // 一个时间段是一个64 位的整数值，这个值跟时钟计时单位(秒、毫秒、微秒)无关
+    int64_t nFirst = durFirst.count();
+    
+    // 两个时刻之间的差值就是一个时间段
+    HIGH_CLOCK::time_point tpSecond = HIGH_CLOCK::now();
+    HIGH_CLOCK::duration dur2_1 = tpSecond - tpFirst;
+    
+    
+    
+    // 一个时刻是由一个64 位整数值表示的，但是一个时刻无法用64位整数值构造，它需要用到一个时间段来构造
+    HIGH_CLOCK::duration durPoint(nFirst);
+    HIGH_CLOCK::time_point tpPoint(durPoint);
+    
+}
+
+
+
+
+
