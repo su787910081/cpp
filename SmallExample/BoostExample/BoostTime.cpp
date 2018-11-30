@@ -22,12 +22,16 @@ boost::posix_time::ptime local_to_utc()
 {
     // 字符串转换成ptime 时，需要考虑时区问题。这里的字符 串时间，boost 内部按第0 时区处理的。
     // 所以需要转换成北京在这个时间的UTC 时刻值(ptime 结构)。
-    boost::posix_time::ptime tm(boost::posix_time::time_from_string("2018-07-06 18:00:00"));
+    boost::posix_time::ptime tm_local(boost::posix_time::time_from_string("2018-07-06 18:00:00"));
 
     using CH_ZONE = boost::date_time::local_adjustor<
         boost::posix_time::ptime, +8, boost::posix_time::no_dst>;
     
-    return CH_ZONE::local_to_utc(tm);
+    boost::posix_time::ptime tm_utc CH_ZONE::local_to_utc(tm_local);
+	
+    // 这里还有一个函数是 utc_tolocal() 也就是本地时区与格林微治时区之间的转换
+    
+    return tm_utc;
 }
 
 
